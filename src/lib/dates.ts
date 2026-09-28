@@ -51,6 +51,12 @@ export function dayLabel(iso: string, today: string = todayISO()): string {
   return `${weekday.format(parseISODate(iso))} ${formatDisplayDate(iso)}`
 }
 
+/** Compact date for bill rows, e.g. 'Sun 20/09'. */
+export function shortDayLabel(iso: string): string {
+  const [, m, d] = iso.split('-')
+  return `${weekday.format(parseISODate(iso))} ${d}/${m}`
+}
+
 /** The last `n` days including `today`, e.g. n=14 → 13 days ago to today. */
 export function lastNDaysRange(n: number, today: string = todayISO()): { fromDate: string; toDate: string } {
   return { fromDate: addDays(today, -(n - 1)), toDate: today }

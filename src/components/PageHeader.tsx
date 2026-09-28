@@ -10,7 +10,7 @@ interface PageHeaderProps {
 
 export default function PageHeader({ title, subtitle, backTo, action }: PageHeaderProps) {
   return (
-    <header className="sticky top-0 z-10 border-b border-gray-200 bg-white/95 px-4 pb-3 pt-[calc(0.75rem+env(safe-area-inset-top))] backdrop-blur">
+    <header className="sticky top-0 z-10 border-b border-gray-200 bg-white/95 px-4 pb-3 pt-[calc(0.75rem+env(safe-area-inset-top))] backdrop-blur print:hidden">
       <div className="flex min-h-12 items-center gap-2">
         {backTo && (
           <Link

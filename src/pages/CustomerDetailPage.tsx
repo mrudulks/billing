@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import BalanceText from '../components/BalanceText'
+import BillListRow from '../components/BillListRow'
 import Button, { buttonClass } from '../components/Button'
 import CustomerAvatar from '../components/CustomerAvatar'
 import DeleteCustomerDialog from '../components/DeleteCustomerDialog'
@@ -9,6 +10,7 @@ import PageHeader from '../components/PageHeader'
 import RecentEntries from '../components/RecentEntries'
 import { deleteCustomer } from '../db/customers'
 import { useBalances } from '../hooks/useBalances'
+import { useBills } from '../hooks/useBills'
 import { useCustomer } from '../hooks/useCustomer'
 import { useRecentEntries } from '../hooks/useRecentEntries'
 
@@ -17,6 +19,7 @@ export default function CustomerDetailPage() {
   const customer = useCustomer(id)
   const balances = useBalances()
   const recent = useRecentEntries(id)
+  const bills = useBills(id)
   const navigate = useNavigate()
   const [confirmDelete, setConfirmDelete] = useState(false)
 
@@ -81,10 +84,26 @@ export default function CustomerDetailPage() {
         <Link to={`/?customer=${id}`} className={buttonClass('primary')}>
           Add entry
         </Link>
-        <Link to={`/customers/${id}/edit`} className={buttonClass('secondary')}>
+        <Link to={`/bills?customer=${id}`} className={buttonClass('secondary')}>
+          Make bill
+        </Link>
+        <Link to={`/customers/${id}/edit`} className={`${buttonClass('quiet')} col-span-2`}>
           Edit details
         </Link>
       </div>
+
+      {bills && bills.length > 0 && (
+        <section className="pb-4" aria-labelledby="bills-heading">
+          <h2 id="bills-heading" className="px-4 pb-2 text-xl font-bold text-ink">
+            Bills
+          </h2>
+          <ul className="divide-y divide-gray-200 border-y border-gray-200">
+            {bills.map((bill) => (
+              <BillListRow key={bill.id} bill={bill} />
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section className="pt-4" aria-labelledby="entries-heading">
         <h2 id="entries-heading" className="px-4 pb-2 text-xl font-bold text-ink">

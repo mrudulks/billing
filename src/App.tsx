@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import AppLayout from './components/AppLayout'
+import BillPage from './pages/BillPage'
 import BillsPage from './pages/BillsPage'
 import CustomerDetailPage from './pages/CustomerDetailPage'
 import CustomersPage from './pages/CustomersPage'
@@ -14,6 +15,7 @@ export default function App() {
       <Route element={<AppLayout />}>
         <Route index element={<EntryPage />} />
         <Route path="bills" element={<BillsPage />} />
+        <Route path="bills/:id" element={<BillPage />} />
         <Route path="customers" element={<CustomersPage />} />
         <Route path="customers/new" element={<NewCustomerPage />} />
         <Route path="customers/:id" element={<CustomerDetailPage />} />

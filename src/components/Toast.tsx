@@ -8,7 +8,7 @@ export default function Toast({ message }: ToastProps) {
   return (
     <div
       role="status"
-      className="fixed inset-x-4 bottom-[calc(10rem+env(safe-area-inset-bottom))] z-30 mx-auto max-w-md rounded-2xl bg-ink px-5 py-4 text-center text-lg font-bold text-white shadow-lg"
+      className="fixed inset-x-4 bottom-[calc(10rem+env(safe-area-inset-bottom))] z-30 mx-auto max-w-md rounded-2xl bg-ink px-5 py-4 text-center text-lg font-bold text-white shadow-lg print:hidden"
     >
       {message}
     </div>

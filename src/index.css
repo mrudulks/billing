@@ -14,3 +14,8 @@
   --color-chai-700: #a8500b;
   --color-danger: #b42318;
 }
+
+/* Print: the one place custom CSS is allowed. */
+@page {
+  margin: 12mm;
+}
