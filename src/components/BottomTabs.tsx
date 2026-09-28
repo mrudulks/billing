@@ -10,7 +10,7 @@ const tabs: { to: string; label: string; icon: TabIconName }[] = [
 
 export default function BottomTabs() {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-20 border-t-2 border-gray-300 bg-white pb-[env(safe-area-inset-bottom)]">
+    <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-gray-300 bg-white pb-[env(safe-area-inset-bottom)]">
       <ul className="mx-auto grid max-w-xl grid-cols-4">
         {tabs.map((tab) => (
           <li key={tab.to}>
@@ -18,13 +18,23 @@ export default function BottomTabs() {
               to={tab.to}
               end={tab.to === '/'}
               className={({ isActive }) =>
-                `flex min-h-16 flex-col items-center justify-center gap-0.5 text-base font-semibold ${
-                  isActive ? 'bg-green-900 text-white' : 'text-gray-700 active:bg-gray-200'
+                `group flex min-h-[4.5rem] flex-col items-center justify-center gap-1 text-[0.95rem] ${
+                  isActive ? 'font-bold text-leaf-800' : 'font-medium text-gray-600'
                 }`
               }
             >
-              <TabIcon name={tab.icon} />
-              {tab.label}
+              {({ isActive }) => (
+                <>
+                  <span
+                    className={`flex h-9 w-16 items-center justify-center rounded-full ${
+                      isActive ? 'bg-leaf-100' : 'group-active:bg-gray-100'
+                    }`}
+                  >
+                    <TabIcon name={tab.icon} />
+                  </span>
+                  {tab.label}
+                </>
+              )}
             </NavLink>
           </li>
         ))}

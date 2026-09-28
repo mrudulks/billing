@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+@theme {
+  --font-sans: Roboto, "Noto Sans", "Noto Sans Malayalam", system-ui, sans-serif;
+
+  --color-ink: #17201a;
+  --color-leaf-50: #f3f8f4;
+  --color-leaf-100: #e8f2ea;
+  --color-leaf-200: #cfe3d4;
+  --color-leaf-600: #2b7a4b;
+  --color-leaf-700: #1f5e3b;
+  --color-leaf-800: #184a2f;
+  --color-chai-50: #fdf3e7;
+  --color-chai-700: #a8500b;
+  --color-danger: #b42318;
+}

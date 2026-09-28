@@ -1,11 +1,11 @@
-import ComingSoon from '../components/ComingSoon'
+import EmptyState from '../components/EmptyState'
 import PageHeader from '../components/PageHeader'
 
 export default function BillsPage() {
   return (
     <>
       <PageHeader title="Bills" />
-      <ComingSoon text="Bills and payments will be added here." />
+      <EmptyState title="Bills come next">Once daily entries are added, you can make a bill for any customer here.</EmptyState>
     </>
   )
 }
