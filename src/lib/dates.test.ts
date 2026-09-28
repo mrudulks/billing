@@ -1,5 +1,30 @@
 import { describe, expect, it } from 'vitest'
-import { addDays, formatDisplayDate, lastNDaysRange, parseISODate, toISODate } from './dates'
+import { addDays, dayLabel, formatDisplayDate, isISODate, lastNDaysRange, parseISODate, relativeDayName, toISODate } from './dates'
+
+describe('isISODate', () => {
+  it('accepts only real YYYY-MM-DD dates', () => {
+    expect(isISODate('2026-09-28')).toBe(true)
+    expect(isISODate('2026-02-30')).toBe(false)
+    expect(isISODate('28/09/2026')).toBe(false)
+    expect(isISODate(null)).toBe(false)
+  })
+})
+
+describe('relativeDayName', () => {
+  it('names today, yesterday, else the weekday', () => {
+    expect(relativeDayName('2026-09-28', '2026-09-28')).toBe('Today')
+    expect(relativeDayName('2026-09-27', '2026-09-28')).toBe('Yesterday')
+    expect(relativeDayName('2026-09-25', '2026-09-28')).toBe('Friday')
+  })
+})
+
+describe('dayLabel', () => {
+  it('names today and yesterday, else weekday and date', () => {
+    expect(dayLabel('2026-09-28', '2026-09-28')).toBe('Today')
+    expect(dayLabel('2026-09-27', '2026-09-28')).toBe('Yesterday')
+    expect(dayLabel('2026-09-25', '2026-09-28')).toBe('Fri 25/09/2026')
+  })
+})
 
 describe('toISODate', () => {
   it('uses local date parts, not UTC', () => {

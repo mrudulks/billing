@@ -6,14 +6,17 @@ import CustomerAvatar from '../components/CustomerAvatar'
 import DeleteCustomerDialog from '../components/DeleteCustomerDialog'
 import EmptyState from '../components/EmptyState'
 import PageHeader from '../components/PageHeader'
+import RecentEntries from '../components/RecentEntries'
 import { deleteCustomer } from '../db/customers'
 import { useBalances } from '../hooks/useBalances'
 import { useCustomer } from '../hooks/useCustomer'
+import { useRecentEntries } from '../hooks/useRecentEntries'
 
 export default function CustomerDetailPage() {
   const id = Number(useParams().id)
   const customer = useCustomer(id)
   const balances = useBalances()
+  const recent = useRecentEntries(id)
   const navigate = useNavigate()
   const [confirmDelete, setConfirmDelete] = useState(false)
 
@@ -74,13 +77,21 @@ export default function CustomerDetailPage() {
         )}
       </dl>
 
-      <div className="flex flex-col gap-3 p-4">
+      <div className="grid grid-cols-2 gap-3 p-4">
+        <Link to={`/?customer=${id}`} className={buttonClass('primary')}>
+          Add entry
+        </Link>
         <Link to={`/customers/${id}/edit`} className={buttonClass('secondary')}>
           Edit details
         </Link>
       </div>
 
-      <p className="px-4 text-lg text-gray-600">Entries, bills and payments for this customer will show here.</p>
+      <section className="pt-4" aria-labelledby="entries-heading">
+        <h2 id="entries-heading" className="px-4 pb-2 text-xl font-bold text-ink">
+          Recent entries
+        </h2>
+        {recent && <RecentEntries entries={recent} />}
+      </section>
 
       <div className="px-4 pb-6 pt-10">
         <Button variant="danger" onClick={() => setConfirmDelete(true)} className="w-full">

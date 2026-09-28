@@ -29,6 +29,28 @@ export function addDays(iso: string, days: number): string {
   return toISODate(new Date(d.getFullYear(), d.getMonth(), d.getDate() + days))
 }
 
+export function isISODate(value: string | null | undefined): value is string {
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false
+  return toISODate(parseISODate(value)) === value
+}
+
+const weekday = new Intl.DateTimeFormat('en-IN', { weekday: 'short' })
+const weekdayLong = new Intl.DateTimeFormat('en-IN', { weekday: 'long' })
+
+/** 'Today', 'Yesterday', otherwise the weekday, e.g. 'Friday'. */
+export function relativeDayName(iso: string, today: string = todayISO()): string {
+  if (iso === today) return 'Today'
+  if (iso === addDays(today, -1)) return 'Yesterday'
+  return weekdayLong.format(parseISODate(iso))
+}
+
+/** 'Today', 'Yesterday', otherwise e.g. 'Fri 25/09/2026'. */
+export function dayLabel(iso: string, today: string = todayISO()): string {
+  if (iso === today) return 'Today'
+  if (iso === addDays(today, -1)) return 'Yesterday'
+  return `${weekday.format(parseISODate(iso))} ${formatDisplayDate(iso)}`
+}
+
 /** The last `n` days including `today`, e.g. n=14 → 13 days ago to today. */
 export function lastNDaysRange(n: number, today: string = todayISO()): { fromDate: string; toDate: string } {
   return { fromDate: addDays(today, -(n - 1)), toDate: today }
