@@ -40,7 +40,7 @@ export default function CustomerForm({ initial = empty, submitLabel, onSubmit }:
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-5 p-4">
+    <form onSubmit={handleSubmit} noValidate className="space-y-5 p-5">
       <TextField
         label="Name"
         value={values.name}

@@ -14,7 +14,7 @@ export default function BillListRow({ bill, customerName }: BillListRowProps) {
   return (
     <li>
       <Link to={`/bills/${bill.id}`} className="flex min-h-18 items-center gap-3 px-4 py-3 active:bg-leaf-50">
-        <span className="flex h-12 min-w-14 shrink-0 items-center justify-center rounded-xl bg-gray-100 px-2 text-base font-bold tabular-nums text-ink">
+        <span className="flex h-12 min-w-14 shrink-0 items-center justify-center rounded-xl bg-paper px-2 text-base font-bold tabular-nums text-ink">
           {formatBillNumber(bill.number)}
         </span>
         <span className="min-w-0 flex-1">

@@ -8,6 +8,8 @@ import CustomerPicker from '../components/CustomerPicker'
 import DateRangePicker from '../components/DateRangePicker'
 import EmptyState from '../components/EmptyState'
 import PageHeader from '../components/PageHeader'
+import Panel from '../components/Panel'
+import SectionHeading from '../components/SectionHeading'
 import { NothingToBillError, saveBill } from '../db/bills'
 import { useBillDraft } from '../hooks/useBillDraft'
 import { useBills } from '../hooks/useBills'
@@ -46,14 +48,14 @@ export default function BillsPage() {
   }
 
   return (
-    <div className={customer ? 'pb-28' : ''}>
+    <div className={customer ? 'pb-32' : 'pb-6'}>
       <PageHeader title="Bills" />
 
       {customers && customers.length === 0 ? (
         <EmptyState title="No customers yet">Add customers and their daily entries first.</EmptyState>
       ) : (
         <section className="space-y-4 px-4 pt-4" aria-label="New bill">
-          <h2 className="text-xl font-bold text-ink">Make a bill</h2>
+          <h2 className="px-1 text-xl font-bold text-ink">Make a bill</h2>
           <CustomerPicker
             customers={customers ?? []}
             selected={customer}
@@ -71,9 +73,9 @@ export default function BillsPage() {
       )}
 
       {customer && draft && (
-        <section className="px-4 pt-5" aria-label="Bill preview">
+        <section className="pt-5" aria-label="Bill preview">
           {draft.older.count > 0 && draft.older.earliestDate && (
-            <div className="mb-4 rounded-2xl border-2 border-chai-700/40 bg-chai-50 p-4">
+            <div className="mx-4 mb-4 rounded-3xl bg-chai-50 p-5 ring-1 ring-chai-700/20">
               <p className="text-lg font-semibold text-chai-700">
                 {draft.older.count} older {draft.older.count === 1 ? 'entry is' : 'entries are'} not billed yet, from{' '}
                 {formatDisplayDate(draft.older.earliestDate)}.
@@ -89,32 +91,36 @@ export default function BillsPage() {
           )}
 
           {entries.length === 0 ? (
-            <p className="rounded-2xl bg-gray-100 p-4 text-lg text-gray-700">
-              No unbilled entries for {customer.name} from {formatDisplayDate(range.fromDate)} to {formatDisplayDate(range.toDate)}.
-            </p>
+            <Panel className="p-5">
+              <p className="text-lg text-gray-700">
+                No unbilled entries for {customer.name} from {formatDisplayDate(range.fromDate)} to {formatDisplayDate(range.toDate)}.
+              </p>
+            </Panel>
           ) : (
-            <BillPreview entries={entries} />
+            <Panel className="p-5">
+              <BillPreview entries={entries} />
+            </Panel>
           )}
-          {error && <p className="pt-3 text-lg font-semibold text-danger">{error}</p>}
+          {error && <p className="px-5 pt-3 text-lg font-semibold text-danger">{error}</p>}
         </section>
       )}
 
       {bills && bills.length > 0 && (
         <section className="pt-10" aria-labelledby="past-bills">
-          <h2 id="past-bills" className="px-4 pb-2 text-xl font-bold text-ink">
-            Past bills
-          </h2>
-          <ul className="divide-y divide-gray-200 border-y border-gray-200">
-            {bills.map((bill) => (
-              <BillListRow key={bill.id} bill={bill} customerName={names.get(bill.customerId) ?? 'Deleted customer'} />
-            ))}
-          </ul>
+          <SectionHeading id="past-bills" title="Past bills" />
+          <Panel>
+            <ul className="divide-y divide-ink/5">
+              {bills.map((bill) => (
+                <BillListRow key={bill.id} bill={bill} customerName={names.get(bill.customerId) ?? 'Deleted customer'} />
+              ))}
+            </ul>
+          </Panel>
         </section>
       )}
 
       {customer && (
         <BottomActionBar caption={entries.length > 0 ? 'Bill total' : 'Nothing to bill'} amount={total}>
-          <Button onClick={handleSave} disabled={entries.length === 0 || saving} className="min-w-36 text-xl">
+          <Button variant="light" onClick={handleSave} disabled={entries.length === 0 || saving} className="min-w-32 text-xl">
             {saving ? 'Saving…' : 'Save bill'}
           </Button>
         </BottomActionBar>

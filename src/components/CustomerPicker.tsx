@@ -31,20 +31,22 @@ export default function CustomerPicker({ customers, selected, onSelect, open, on
       <button
         type="button"
         onClick={() => onOpenChange(true)}
-        className={`flex min-h-18 w-full items-center gap-3 rounded-3xl border-2 px-4 py-3 text-left active:bg-leaf-50 ${
-          selected ? 'border-gray-300 bg-white' : 'border-dashed border-leaf-600 bg-leaf-50'
-        }`}
+        className="flex min-h-18 w-full items-center gap-3 rounded-3xl bg-white px-4 py-3 text-left ring-1 ring-ink/5 active:bg-leaf-50"
       >
         {selected ? (
           <CustomerAvatar name={selected.name} />
         ) : (
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-leaf-700 text-2xl font-bold text-white">?</span>
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-chai-50 text-chai-700">
+            <svg viewBox="0 0 24 24" className="h-7 w-7" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" aria-hidden="true">
+              <path d="M16 19v-1a4 4 0 0 0-8 0v1M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6" />
+            </svg>
+          </span>
         )}
         <span className="min-w-0 flex-1">
           <span className="block text-base text-gray-600">Customer</span>
           <span className="block truncate text-xl font-bold text-ink">{selected?.name ?? 'Tap to choose'}</span>
         </span>
-        <span className="shrink-0 text-lg font-bold text-leaf-700">{selected ? 'Change' : ''}</span>
+        <span className="shrink-0 rounded-full bg-leaf-100 px-3 py-1 text-base font-bold text-leaf-800">{selected ? 'Change' : 'Choose'}</span>
       </button>
 
       <BottomSheet open={open} title="Choose customer" onClose={() => onOpenChange(false)}>

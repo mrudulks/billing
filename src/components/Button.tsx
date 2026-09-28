@@ -1,6 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react'
 
-type Variant = 'primary' | 'secondary' | 'danger' | 'dangerSolid' | 'quiet'
+type Variant = 'primary' | 'secondary' | 'danger' | 'dangerSolid' | 'quiet' | 'light'
 
 const variants: Record<Variant, string> = {
   primary: 'bg-leaf-700 text-white active:bg-leaf-800 disabled:bg-gray-400',
@@ -8,6 +8,7 @@ const variants: Record<Variant, string> = {
   danger: 'border-2 border-danger bg-white text-danger active:bg-red-50',
   dangerSolid: 'bg-danger text-white active:bg-red-800',
   quiet: 'text-leaf-800 active:bg-leaf-100',
+  light: 'bg-white text-leaf-800 active:bg-leaf-100 disabled:bg-white/15 disabled:text-white/50',
 }
 
 export const buttonClass = (variant: Variant = 'primary') =>

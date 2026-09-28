@@ -17,7 +17,7 @@ export default function DateField({ label, value, min, max, onChange }: DateFiel
       <label htmlFor={id} className="mb-1.5 block text-base font-semibold text-ink">
         {label}
       </label>
-      <div className="relative flex min-h-14 items-center rounded-2xl border-2 border-gray-400 bg-white px-4 focus-within:border-leaf-700 focus-within:ring-2 focus-within:ring-leaf-200">
+      <div className="relative flex min-h-14 items-center rounded-2xl bg-white px-4 ring-1 ring-ink/10 focus-within:ring-2 focus-within:ring-leaf-600">
         <span className="text-lg font-semibold tabular-nums">{formatDisplayDate(value)}</span>
         <input
           id={id}

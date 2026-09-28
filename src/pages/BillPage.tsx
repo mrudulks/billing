@@ -62,7 +62,7 @@ export default function BillPage() {
     <div className="pb-8 print:pb-0">
       <PageHeader title={`Bill ${number}`} subtitle={customerName} backTo="/bills" />
 
-      <article className="mx-4 mt-4 rounded-3xl border-2 border-gray-200 p-5 print:m-0 print:rounded-none print:border-0 print:p-0">
+      <article className="mx-4 mt-4 overflow-hidden rounded-3xl border-t-8 border-leaf-700 bg-white p-5 ring-1 ring-ink/5 print:m-0 print:rounded-none print:border-0 print:p-0 print:ring-0">
         <header className="border-b-2 border-dashed border-gray-300 pb-4 text-center">
           <p className="text-2xl font-bold text-leaf-800 print:text-ink">{shop.shopName || 'Bill'}</p>
           {shop.shopPhone && <p className="text-lg tabular-nums text-gray-700">{shop.shopPhone}</p>}

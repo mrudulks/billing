@@ -25,7 +25,7 @@ export default function ShopDetailsForm({ initial }: { initial: ShopDetails }) {
   }
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="space-y-5 px-4">
+    <form onSubmit={handleSubmit} noValidate className="space-y-5 px-5">
       <TextField
         label="Shop name"
         value={shopName}

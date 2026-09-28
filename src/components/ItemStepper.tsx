@@ -10,10 +10,10 @@ interface ItemStepperProps {
 
 export default function ItemStepper({ item, qty, onChange }: ItemStepperProps) {
   const stepClass =
-    'flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl text-3xl font-bold leading-none active:scale-95 disabled:opacity-30'
+    'flex h-14 w-14 shrink-0 items-center justify-center rounded-full text-3xl font-bold leading-none active:scale-95 disabled:opacity-30'
 
   return (
-    <li className={`flex items-center gap-3 px-4 py-3 ${qty > 0 ? 'bg-leaf-50' : ''}`}>
+    <li className={`flex items-center gap-2 py-3 pl-5 pr-3 ${qty > 0 ? 'bg-leaf-50' : ''}`}>
       <div className="min-w-0 flex-1">
         <p className="truncate text-lg font-bold text-ink">{item.name}</p>
         <p className="text-base tabular-nums text-gray-600">{formatRupees(item.defaultPrice)} each</p>
@@ -24,7 +24,7 @@ export default function ItemStepper({ item, qty, onChange }: ItemStepperProps) {
         onClick={() => onChange(clampQty(qty - 1))}
         disabled={qty === 0}
         aria-label={`One less ${item.name}`}
-        className={`${stepClass} border-2 border-gray-300 bg-white text-ink`}
+        className={`${stepClass} border-2 border-leaf-200 bg-white text-leaf-800`}
       >
         −
       </button>

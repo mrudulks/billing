@@ -18,14 +18,14 @@ export default function DateSwitcher({ date, onChange }: DateSwitcherProps) {
   const today = todayISO()
   const isToday = date >= today
   const arrowClass =
-    'flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border-2 border-gray-300 text-ink active:bg-leaf-100 disabled:border-gray-200 disabled:text-gray-300'
+    'flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-ink ring-1 ring-ink/5 active:bg-leaf-100 disabled:bg-white/10 disabled:text-white/35 disabled:ring-white/10'
 
   return (
     <div className="flex items-center gap-2">
       <button type="button" onClick={() => onChange(addDays(date, -1))} aria-label="Previous day" className={arrowClass}>
         <Arrow direction="left" />
       </button>
-      <label className="relative flex min-h-14 flex-1 flex-col items-center justify-center rounded-2xl border-2 border-gray-300 px-2 active:bg-leaf-50">
+      <label className="relative flex min-h-14 flex-1 flex-col items-center justify-center rounded-2xl bg-white px-2 ring-1 ring-ink/5 active:bg-leaf-50">
         <span className={`text-lg font-bold leading-tight ${isToday ? 'text-ink' : 'text-chai-700'}`}>
           {relativeDayName(date, today)}
         </span>

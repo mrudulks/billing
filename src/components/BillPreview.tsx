@@ -21,14 +21,14 @@ export default function BillPreview({ entries, previous }: BillPreviewProps) {
       <section>
         <h3 className="pb-1 text-lg font-bold text-ink">Day by day</h3>
         <table className="w-full border-collapse">
-          <thead className="border-b-2 border-gray-300">
+          <thead className="border-b-2 border-ink/10">
             <tr>
               <th className={th}>Date</th>
               <th className={th}>Items</th>
               <th className={`${th} text-right`}>Amount</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-ink/5">
             {days.map((day) => (
               <tr key={day.date} className="break-inside-avoid align-top">
                 <td className="whitespace-nowrap py-2 pr-3 text-base font-semibold">{shortDayLabel(day.date)}</td>
@@ -43,7 +43,7 @@ export default function BillPreview({ entries, previous }: BillPreviewProps) {
       <section>
         <h3 className="pb-1 text-lg font-bold text-ink">Summary</h3>
         <table className="w-full border-collapse">
-          <thead className="border-b-2 border-gray-300">
+          <thead className="border-b-2 border-ink/10">
             <tr>
               <th className={th}>Item</th>
               <th className={`${th} text-right`}>Qty</th>
@@ -51,7 +51,7 @@ export default function BillPreview({ entries, previous }: BillPreviewProps) {
               <th className={`${th} text-right`}>Amount</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+          <tbody className="divide-y divide-ink/5">
             {items.map((item) => (
               <tr key={`${item.itemName}-${item.unitPrice}`}>
                 <td className="py-2 text-lg font-semibold">{item.itemName}</td>

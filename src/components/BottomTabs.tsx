@@ -10,7 +10,7 @@ const tabs: { to: string; label: string; icon: TabIconName }[] = [
 
 export default function BottomTabs() {
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-gray-300 bg-white pb-[env(safe-area-inset-bottom)] print:hidden">
+    <nav className="fixed inset-x-0 bottom-0 z-30 border-t border-ink/5 bg-white pb-[env(safe-area-inset-bottom)] shadow-[0_-6px_20px_rgba(23,32,26,0.06)] print:hidden">
       <ul className="mx-auto grid max-w-xl grid-cols-4">
         {tabs.map((tab) => (
           <li key={tab.to}>

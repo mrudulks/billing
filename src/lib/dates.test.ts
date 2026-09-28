@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { addDays, dayLabel, formatDisplayDate, isISODate, lastNDaysRange, parseISODate, relativeDayName, shortDayLabel, toISODate } from './dates'
+import { addDays, dayLabel, formatDisplayDate, isISODate, lastNDaysRange, longDateLabel, parseISODate, relativeDayName, shortDayLabel, toISODate } from './dates'
 
 describe('isISODate', () => {
   it('accepts only real YYYY-MM-DD dates', () => {
@@ -15,6 +15,12 @@ describe('relativeDayName', () => {
     expect(relativeDayName('2026-09-28', '2026-09-28')).toBe('Today')
     expect(relativeDayName('2026-09-27', '2026-09-28')).toBe('Yesterday')
     expect(relativeDayName('2026-09-25', '2026-09-28')).toBe('Friday')
+  })
+})
+
+describe('longDateLabel', () => {
+  it('shows weekday, day and month', () => {
+    expect(longDateLabel('2026-09-28')).toBe('Monday, 28 September')
   })
 })
 

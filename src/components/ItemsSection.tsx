@@ -3,7 +3,8 @@ import type { Item } from '../db/types'
 import { useItems } from '../hooks/useItems'
 import { formatRupees } from '../lib/money'
 import BottomSheet from './BottomSheet'
-import Button from './Button'
+import Panel from './Panel'
+import SectionHeading from './SectionHeading'
 import ItemForm from './ItemForm'
 
 type Editing = { mode: 'closed' } | { mode: 'add' } | { mode: 'edit'; item: Item }
@@ -23,7 +24,7 @@ export default function ItemsSection() {
       <button
         type="button"
         onClick={() => setEditing({ mode: 'edit', item })}
-        className="flex min-h-16 w-full items-center justify-between gap-3 px-4 py-3 text-left active:bg-leaf-50"
+        className="flex min-h-16 w-full items-center justify-between gap-3 px-5 py-3 text-left active:bg-leaf-50"
       >
         <span className={`text-lg font-semibold ${item.active ? 'text-ink' : 'text-gray-500'}`}>{item.name}</span>
         <span className={`text-lg font-bold tabular-nums ${item.active ? 'text-ink' : 'text-gray-500'}`}>
@@ -35,30 +36,36 @@ export default function ItemsSection() {
 
   return (
     <section aria-labelledby="items-heading">
-      <div className="flex items-end justify-between px-4 pb-2">
-        <h2 id="items-heading" className="text-xl font-bold text-ink">
-          Items and prices
-        </h2>
-      </div>
-
-      {items.length === 0 ? (
-        <p className="px-4 pb-3 text-lg text-gray-700">Add the things you sell, like tea, coffee and snacks, with their price.</p>
-      ) : (
-        <ul className="divide-y divide-gray-200 border-y border-gray-200">{shown.map(row)}</ul>
-      )}
+      <SectionHeading id="items-heading" title="Items and prices" aside={items.length > 0 ? `${shown.length} on entry screen` : undefined} />
+      <Panel>
+        {items.length === 0 && (
+          <p className="px-5 pt-4 text-lg text-gray-700">Add the things you sell, like tea, coffee and snacks, with their price.</p>
+        )}
+        <ul className="divide-y divide-ink/5">
+          {shown.map(row)}
+          <li>
+            <button
+              type="button"
+              onClick={() => setEditing({ mode: 'add' })}
+              className="flex min-h-16 w-full items-center gap-3 px-5 py-3 text-left text-lg font-bold text-leaf-700 active:bg-leaf-50"
+            >
+              <span aria-hidden="true" className="flex h-9 w-9 items-center justify-center rounded-full bg-leaf-100 text-2xl leading-none">
+                +
+              </span>
+              Add item
+            </button>
+          </li>
+        </ul>
+      </Panel>
 
       {hidden.length > 0 && (
         <>
-          <h3 className="px-4 pb-1 pt-4 text-base font-semibold text-gray-600">Hidden from entry screen</h3>
-          <ul className="divide-y divide-gray-200 border-y border-gray-200">{hidden.map(row)}</ul>
+          <h3 className="px-5 pb-2 pt-5 text-base font-semibold text-gray-600">Hidden from entry screen</h3>
+          <Panel>
+            <ul className="divide-y divide-ink/5">{hidden.map(row)}</ul>
+          </Panel>
         </>
       )}
-
-      <div className="px-4 pt-3">
-        <Button variant="secondary" onClick={() => setEditing({ mode: 'add' })} className="w-full">
-          Add item
-        </Button>
-      </div>
 
       <BottomSheet
         open={editing.mode !== 'closed'}

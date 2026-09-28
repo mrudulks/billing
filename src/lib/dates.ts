@@ -51,6 +51,15 @@ export function dayLabel(iso: string, today: string = todayISO()): string {
   return `${weekday.format(parseISODate(iso))} ${formatDisplayDate(iso)}`
 }
 
+const longDate = new Intl.DateTimeFormat('en-IN', { weekday: 'long', day: 'numeric', month: 'long' })
+
+/** e.g. 'Monday, 28 September' */
+export function longDateLabel(iso: string): string {
+  const parts = longDate.formatToParts(parseISODate(iso))
+  const part = (type: string) => parts.find((p) => p.type === type)?.value ?? ''
+  return `${part('weekday')}, ${part('day')} ${part('month')}`
+}
+
 /** Compact date for bill rows, e.g. 'Sun 20/09'. */
 export function shortDayLabel(iso: string): string {
   const [, m, d] = iso.split('-')

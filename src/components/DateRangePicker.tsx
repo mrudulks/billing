@@ -46,7 +46,7 @@ export default function DateRangePicker({ fromDate, toDate, onChange, sinceLastB
               onClick={() => onChange(range)}
               aria-pressed={active}
               className={`min-h-11 rounded-full border-2 px-4 text-base font-semibold ${
-                active ? 'border-leaf-700 bg-leaf-700 text-white' : 'border-gray-300 bg-white text-ink active:bg-leaf-50'
+                active ? 'border-leaf-700 bg-leaf-700 text-white' : 'border-white bg-white text-ink active:bg-leaf-50'
               }`}
             >
               {label}

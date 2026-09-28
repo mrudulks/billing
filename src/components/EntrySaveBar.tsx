@@ -14,11 +14,11 @@ export default function EntrySaveBar({ count, total, hasCustomer, saving, onSave
   return (
     <BottomActionBar caption={count === 0 ? 'Nothing added' : `${count} ${count === 1 ? 'item' : 'items'}`} amount={total}>
       {hasCustomer ? (
-        <Button onClick={onSave} disabled={count === 0 || saving} className="min-w-36 text-xl">
+        <Button variant="light" onClick={onSave} disabled={count === 0 || saving} className="min-w-32 text-xl">
           {saving ? 'Saving…' : 'Save'}
         </Button>
       ) : (
-        <Button onClick={onChooseCustomer} className="min-w-36">
+        <Button variant="light" onClick={onChooseCustomer} className="min-w-32">
           Choose customer
         </Button>
       )}
